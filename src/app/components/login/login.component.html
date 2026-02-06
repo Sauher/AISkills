@@ -1,23 +1,27 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header text-center">
-          <h3>Login</h3>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" [(ngModel)]="user.username" id="username"  name="username" required>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" [(ngModel)]="user.password" id="password"  name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100" (click)="login()">Login</button>
-          </form>
-        </div>
-      </div>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-lg" style="width: 100%; max-width: 400px; border-radius: 15px;">
+    <div class="card-header text-center bg-dark text-white" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <img src="https://napiboldogsag.com/wp-content/uploads/2015/07/cuki-cica.jpg" style="width:200px; height: 100px; border: dotted rgb(196, 35, 35) 10px;" alt="">
+      <h3>Welcome Back</h3>
+      <p class="mb-0">Please login to your account</p>
     </div>
+    <div class="card-body p-4">
+      <form>
+        <div class="mb-4">
+          <label for="username" class="form-label">Username</label>
+          <input type="username" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          
+         
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+    </div>
+    
   </div>
+</div>
