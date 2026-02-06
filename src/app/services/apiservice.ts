@@ -13,17 +13,16 @@ export class APIService {
 
   constructor() { }
 
-  async startChat():Promise<ApiResponse>{
-    try{
-        const res = await axios.post(`${this.SERVER}/conversation`, {});
-        console.log(res.data);
-        return res.data;
-    }catch(err){
-    console.error(err);
-    return {
-        status: 500,
-        message: 'Error sending mail'
+    async login(username: string, password: string): Promise<ApiResponse> {
+        try {
+            const response = await axios.post(`${this.SERVER}/login`, { username, password });
+            return response.data as ApiResponse;
+        } catch (error: any) {
+            if (error.response) {
+                return error.response.data as ApiResponse;
+            } else {
+                return { status: 500, message: 'Server error' };
+            }
+        }
     }
-    }
-}
 }
