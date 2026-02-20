@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { APIService } from '../../services/apiservice';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,8 @@ import { APIService } from '../../services/apiservice';
 })
 export class MainComponent {
   constructor(
-    private api : APIService
+    private api : APIService,
+    private router : Router
   ) {}
 
   cards = [
@@ -37,9 +39,8 @@ export class MainComponent {
   ];
 
   onCardClick(item: any) {
-    console.log('Card clicked:', item);
-    this.api.tokenauth(localStorage.getItem('token')!).then(res =>{
-      console.log(res);
-    })
+    this.router.navigate(['/tokenauth/'+item.toLowerCase()]);
+    
+    }
   }
-}
+

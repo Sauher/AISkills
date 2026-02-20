@@ -6,7 +6,7 @@
           <img [src]="item.image" [alt]="item.title" class="card-image">
           <h3 class="card-title">{{ item.title }}</h3>
           <p class="card-description">{{ item.description }}</p>
-          <button class="card-button" (click)="onCardClick(item)">{{ item.buttonText }}</button>
+          <button class="card-button" (click)="onCardClick(item.title)">{{ item.buttonText }}</button>
         </div>
       </div>
 </div>

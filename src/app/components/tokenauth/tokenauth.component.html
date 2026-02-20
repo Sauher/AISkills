@@ -1,1 +1,18 @@
-<p>tokenauth works!</p>
+<div>
+    <h2 class="text-center mt-5">Token Authentication</h2>
+    <p class="text-center mb-4">Please enter your token to access the application.</p>
+    
+    <div class="d-flex justify-content-center mb-3">
+        <div class="card shadow-lg" style="width: 100%; max-width: 400px; border-radius: 15px;">
+        <div class="card-body p-4">
+            <form>
+            <div class="mb-4">
+                <label for="token" class="form-label">Token</label>
+                <input type="text" [(ngModel)]="token" class="form-control" id="token" name="token" placeholder="Enter your token" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" (click)="authenticate()">Authenticate</button>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
