@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { APIService } from '../../services/apiservice';
+import { MessageService } from '../../services/messageservice';
 
 @Component({
   selector: 'app-tokenauth',
@@ -12,19 +14,43 @@ import { Router } from '@angular/router';
 })
 export class TokenauthComponent implements OnInit {
   token: string = '';
-  constructor(private router:Router) {}
-  ai:string = ""
+  ai: string = '';
 
-  ngOnInit():void{
-    const url = window.location.href;
-    const parts = url.split('/');
-    this.ai = parts[parts.length - 1];
-    console.log(this.ai);
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: APIService,
+    private msg: MessageService
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.ai = params['aiName']; // Get from route parameter
+      console.log('AI Name:', this.ai);
+    });
   }
 
   authenticate() {
-
-    // Implement your token authentication logic here
-    console.log('Authenticating with token:', this.token);
+    this.api.tokenauth(this.token, 'string').then(res => {
+      console.log('Response:', res);
+      
+      this.msg.show('success', 'Siker', "Sikeres autentikáció!");
+      
+      const aiName = this.ai.toLowerCase();
+      const conversationId = res.conversation_id;
+      
+      if(aiName === "chatterblast") {
+        this.router.navigate([`/chatterblast/${conversationId}`]);
+      }
+      else if(aiName === "dreamweaver") {
+        this.router.navigate([`/dreamweaver/${conversationId}`]);
+      }
+      else if(aiName === "mindreader") {
+        this.router.navigate([`/mindreader/${conversationId}`]);
+      }
+    }).catch(error => {
+      console.error('Authentication error:', error);
+      this.msg.show('danger', 'Hiba', "Sikertelen autentikáció!");
+    });
   }
 }

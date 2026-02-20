@@ -26,26 +26,59 @@ export class APIService {
             if (error.response) {
                 return error.response.data as ApiResponse;
             } else {
-                return { status: 500, message: 'Server error' };
+                return { status: 500, message: 'Server error',response: '' };
             }
         }
     }
-    async tokenauth(token: string): Promise<ApiResponse> {
-      try {
-          const response = await axios.get(`${this.SERVER}/auth`, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              withCredentials: true
-            });
-          return response.data as ApiResponse;
-      } catch (error: any) {
-            if (error.response) {
-                return error.response.data as ApiResponse;
-            } else {
-                return { status: 500, message: 'Server error' };
-            }
-        }
+    async tokenauth(token: string,prompt:string): Promise<ApiResponse> {
+        try {
+          const res = await axios.post(`${this.SERVER}/api/chat/conversation`, { token , prompt}, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true
+          });
+          return res.data as ApiResponse;
+        } catch (error: any) {
+          if (error.response) {
+            return error.response.data as ApiResponse;
+          } else {
+            return { status: 500, message: 'Server error',response: '' };
+          }
     }
+  }
+  async getMessage(conversationId: string): Promise<ApiResponse> {
+    try {
+      const res = await axios.get(`${this.SERVER}/api/chat/conversation/${conversationId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true
+      });
+      return res.data as ApiResponse;
+    } catch (error: any) {
+      if (error.response) {
+        return error.response.data as ApiResponse;
+      } else {
+        return { status: 500, message: 'Server error',response: '' };
+      }
+    }
+  }
+  async putMessage(conversationId: string,prompt:string): Promise<ApiResponse> {
+    try {
+      const res = await axios.put(`${this.SERVER}/api/chat/conversation/${conversationId}`,{prompt}, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true
+      });
+      return res.data as ApiResponse;
+    } catch (error: any) {
+      if (error.response) {
+        return error.response.data as ApiResponse;
+      } else {
+        return { status: 500, message: 'Server error',response: '' };
+      }
+    }
+  }
 }
