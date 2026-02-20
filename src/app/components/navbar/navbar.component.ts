@@ -13,10 +13,6 @@ import { AuthService } from '../../services/authservice';
 })
 export class NavbarComponent {
   isLoggedIn = false;
-  isAdmin = false;
-  isOwner = false;
-  loggedUserName = '';
-  cartCount = 0
   constructor(
     private auth: AuthService,
   ){}
@@ -25,16 +21,12 @@ export class NavbarComponent {
 
   ngOnInit():void{
     this.auth.isLoggedIn$.subscribe(res =>{
-      this.isLoggedIn = res
-      this.isAdmin = this.auth.isAdmin()
-      this.isOwner = this.auth.isOwner()
+      this.isLoggedIn = res;
 
       if(this.isLoggedIn){
-        this.loggedUserName = this.auth.loggedUser()[0].name;
         this.setupMenu(true);
       }
       else{
-        this.loggedUserName = ""
         this.setupMenu(false)
       }
       
@@ -45,8 +37,8 @@ export class NavbarComponent {
     this.navItems=[
       ...(isLoggedIn)?[
       {
-        name: 'Belépés',
-        url:'login'
+        name: 'Kilépés',
+        url:'logout'
       }
     ]
     :[

@@ -1,0 +1,12 @@
+<div class="main-container">
+      <h2 class="main-title text-center mt-3">Welcome to AI Skills</h2>
+      <p class="main-description text-center">Discover and enhance your AI skills with our comprehensive resources and tutorials.</p>
+    <div class="cards-container mt-3 mb-3">
+        <div class="card" *ngFor="let item of cards">
+          <img [src]="item.image" [alt]="item.title" class="card-image">
+          <h3 class="card-title">{{ item.title }}</h3>
+          <p class="card-description">{{ item.description }}</p>
+          <button class="card-button" (click)="onCardClick(item)">{{ item.buttonText }}</button>
+        </div>
+      </div>
+</div>
