@@ -1,21 +1,24 @@
-<div class="chat-container">
-    <div class="chat-messages">
-      <div *ngFor="let message of messages" [ngClass]="message.sender === 'user' ? 'user-message' : 'ai-message'">
-        <p>{{ message.text }}</p>
+<div class="chat-wrapper">
+    <div class="chat-container">
+      <div class="chat-messages">
+        <div *ngFor="let message of messages" [ngClass]="message.sender === 'user' ? 'user-message' : 'ai-message'">
+          <p>{{ message.text }}</p>
+        </div>
       </div>
-    </div>
   
-    <div class="chat-input-container">
-      <input 
-        type="text" 
-        [(ngModel)]="userInput" 
-        placeholder="Type your message..." 
-        (keyup.enter)="sendMessage()"
-        class="chat-input"
-        [disabled]="isLoading"
-      >
-      <button (click)="sendMessage()" class="send-button" [disabled]="isLoading">
-        {{ isLoading ? 'Sending...' : 'Send' }}
-      </button>
+      <div class="chat-input-container">
+        <input 
+          type="text" 
+          [(ngModel)]="userInput" 
+          placeholder="Type a message..." 
+          (keyup.enter)="sendMessage()"
+          class="chat-input"
+          [disabled]="isLoading"
+        >
+        <button (click)="sendMessage()" class="send-button" [disabled]="isLoading">
+          <span *ngIf="!isLoading">➤</span>
+          <span *ngIf="isLoading">⌛</span>
+        </button>
+      </div>
     </div>
   </div>
